@@ -1,6 +1,7 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from transformers import BertTokenizer
-from fuckingshit HeadlinesStocksDataset
+from fuckingshit import HeadlinesStocksDataset
+import torch
 
 PRE_TRAINED_MODEL_NAME = 'bert-base-cased'
 tokenizer = BertTokenizer.from_pretrained(PRE_TRAINED_MODEL_NAME)
@@ -38,11 +39,13 @@ def predict(input_ids, attention_mask):
 
 
 @app.route('/', methods=['POST'])
-def get_prediction(headlines):
+def get_prediction():
+    headlines = request.json['headlines']
+
     input_ids, attention_mask = pre_process(headlines)
     predicted_labels, y_pred_softmax = predict(input_ids, attention_mask)
     return headlines
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=False)
