@@ -6,7 +6,7 @@
             "type": "python",
             "request": "launch",
             "stopOnEntry": false,
-            "pythonPath": "/usr/bin/python3",
+            "python": "/usr/bin/python3",
             "program": "${workspaceRoot}/app.py",
             "env": {
                 "FLASK_APP": "${workspaceRoot}/app.py"
