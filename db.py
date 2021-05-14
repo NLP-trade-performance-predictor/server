@@ -2,14 +2,13 @@ from pymongo import MongoClient
 from sklearn import metrics
 from os import getenv
 
-labels = ['down', 'same', 'up']
 
 client = MongoClient(getenv('MONGO_CONN'))
 db=client.spi
 
 
 def save(obj):
-    r=db.results.insert_one(obj)
+    db.results.insert_one(obj)
 
 
 def get_metrics():
