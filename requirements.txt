@@ -5,3 +5,4 @@ transformers
 pandas
 pymongo
 dnspython
+flask-cors
