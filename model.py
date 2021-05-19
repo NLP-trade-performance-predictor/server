@@ -1,5 +1,6 @@
-from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
+from transformers_interpret import SequenceClassificationExplainer
 
 
 PRE_TRAINED_MODEL_NAME = 'ProsusAI/finbert'
@@ -39,3 +40,12 @@ def predict(input_ids, attention_mask):
     predicted_label_name = labels[predicted_label_id]
 
     return predicted_label_id, predicted_label_name, prob
+
+
+def interpret(headline):
+    cls_explainer = SequenceClassificationExplainer(
+    model,
+    tokenizer)
+    cls_explainer(headline)
+
+    return cls_explainer.visualize()._repr_html_()

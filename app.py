@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-from model import pre_process, predict
+from model import interpret, pre_process, predict
 from db import save, get_metrics
 import datetime
 
@@ -10,8 +10,8 @@ CORS(app)
 
 @app.route('/predict', methods=['POST'])
 def get_prediction():
-    headline = [request.json['headline']]
-    input_ids, attention_mask = pre_process(headline)
+    headline = request.json['headline']
+    input_ids, attention_mask = pre_process([headline])
     predicted_label_id, predicted_label_name, prob = predict(input_ids, attention_mask)
 
     response = {'date': datetime.datetime.now(),
@@ -21,6 +21,8 @@ def get_prediction():
                 'prob': prob}
 
     save(response)
+
+    response['interpretation'] = interpret(headline)
 
     del response['_id']
     del response['date']

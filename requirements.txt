@@ -1,8 +1,10 @@
 flask
-torch
-sklearn
-transformers
-pandas
-pymongo
-dnspython
 flask-cors
+dnspython
+ipython
+pymongo
+pandas
+sklearn
+torch
+transformers
+transformers-interpret
