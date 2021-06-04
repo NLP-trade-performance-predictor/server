@@ -24,5 +24,6 @@ def get_metrics():
     precision = metrics.precision_score(golds, preds, average='macro')
     recall = metrics.recall_score(golds, preds, average='macro')
     f1_score = metrics.f1_score(golds, preds, average='macro')
+    cm = metrics.confusion_matrix(golds, preds)
 
-    return accuracy, precision, recall, f1_score
+    return accuracy, precision, recall, f1_score, cm

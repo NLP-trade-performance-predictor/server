@@ -33,12 +33,13 @@ def get_prediction():
 
 @app.route('/metric', methods=['GET'])
 def metrics():
-    accuracy, precision, recall, f1_score = get_metrics()
+    accuracy, precision, recall, f1_score, cm = get_metrics()
 
     response = {'accuracy': accuracy,
                 'precision': precision,
                 'recall': recall,
-                'f1_score': f1_score}
+                'f1_score': f1_score,
+                'cm': cm.tolist()}
 
     return jsonify(response)
 
